@@ -10,13 +10,29 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 66vw;
-  height: 66vw;
-  background-color: lightblue;
-  
+  height: 66vw;  
 }
-.gridUnit {
+
+.backgroundUnit {
   height: 6vw;
   width: 6vw;
   margin: -1px;
+  background-color: lightblue;
+  border: 1px solid black;
+}
+
+.branchUnit {
+  height: 6vw;
+  width: 6vw;
+  margin: -1px;
+  background-color: brown;
+  border: 1px solid black;
+}
+
+.leafUnit {
+  height: 6vw;
+  width: 6vw;
+  margin: -1px;
+  background-color: lightgreen;
   border: 1px solid black;
 }
