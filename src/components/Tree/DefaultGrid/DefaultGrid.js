@@ -1,10 +1,7 @@
 import TreeUnit from '../TreeUnit/TreeUnit.js'
 
-import React, { Component } from 'react'
 
-// export default class DefaultGrid extends Component {
 const makeDefaultGrid = () => {
-  console.log('hi')
   let defaultGrid = []
   let n = 0 //row number
 
