@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import axios from 'axios'
 // import TreeUnit from './TreeUnit/TreeUnit.js'
 import makeDefaultGrid from './DefaultGrid/DefaultGrid.js'
-import {TreeStructure, Node} from './TreeStructure/TreeStructure.js'
+import {GenerateTree, Node} from './TreeStructure/TreeStructure.js'
 // import Node from './TreeStructure/TreeStructure.js'
 import './Tree.css'
 
@@ -10,11 +10,16 @@ import './Tree.css'
 export default class Tree extends Component {
   render() {
     let defaultGrid = makeDefaultGrid()    
-    let treeStructure = new TreeStructure(4, [0,1])
-    treeStructure.extendBranch (treeStructure.heads[0], 3, [1,1], [0,1])
+    // let treeStructure = new TreeStructure(2, [0,1])
+    
+    
 
     
+    let recursiveTree = GenerateTree(9, 3, [0,1])
+    
+    
     let branches = []
+    makeBranches(recursiveTree)
     function makeBranches(node) {
       let startCoordinate = node.start
       let direction = node.direction
@@ -23,11 +28,10 @@ export default class Tree extends Component {
       node.childRight ? makeBranches(node.childRight) : null
       node.childLeft ? makeBranches(node.childLeft) : null
     }
-
-    makeBranches(treeStructure._root)
-    console.log(branches)
-
-
+    
+    
+    
+    
     //takes branch info and makes array of branch coordinates
     function makeBranch(startCoordinate, direction, length) {
       for (let i = 0; i < length; i++) {
