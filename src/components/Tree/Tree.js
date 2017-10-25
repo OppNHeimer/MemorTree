@@ -14,7 +14,7 @@ export default class Tree extends Component {
     
     
 
-    let recursiveTree = GenerateTree(7, 4, [0,1])
+    let recursiveTree = GenerateTree(10,/* length,*/ [0,1])
   
     
     let branches = []
