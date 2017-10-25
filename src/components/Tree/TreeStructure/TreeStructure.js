@@ -24,7 +24,7 @@ function GenerateTree(depth,/* length,*/ direction) {
 
 function growTrunk (depth,/* length,*/ direction, parent) {
   let currentNode = checks(depth,/* length,*/ direction, parent)
-  if (depth > 1 && currentNode) {
+  if (depth > 3 && currentNode) {
     let doesSplit = randomInt(0, 1)
     if (doesSplit) {
       currentNode.childLeft = growTrunk(depth - 1,/* length,*/ [0, 1], currentNode)
@@ -48,7 +48,7 @@ function growTrunk (depth,/* length,*/ direction, parent) {
 
 function growRightBranches(depth,/* length,*/ direction, parent) {
   let currentNode = checks(depth,/* length,*/ direction, parent)
-  if (depth > 1 && currentNode) {
+  if (depth > 3 && currentNode) {
     let doesSplit = randomInt(0, 1)
     if (doesSplit) {
       currentNode.childLeft = growRightBranches(depth - 1,/* length,*/ [1, 1], currentNode)
@@ -67,7 +67,7 @@ function growRightBranches(depth,/* length,*/ direction, parent) {
 
 function growLeftBranches(depth,/* length,*/ direction, parent) {
   let currentNode = checks(depth,/* length,*/ direction, parent)
-  if (depth > 1 && currentNode) {
+  if (depth > 3 && currentNode) {
     let doesSplit = randomInt(0, 1)
     if (doesSplit) {
       currentNode.childLeft = growLeftBranches(depth - 1,/* length,*/ [-1, 0], currentNode)
@@ -85,25 +85,22 @@ function growLeftBranches(depth,/* length,*/ direction, parent) {
 } 
 
 function checks(depth,/* length,*/ direction, parent) {
-  if (depth <= 1) return false //ends recursion at 0
+  if (depth <= 3) return false //ends recursion at 3
   let currentNode = new Node(depth, direction, parent)
-  //checks new coordinates against existing ones
+    //checks new coordinates against existing ones
   if (checkCoordinates(currentNode.start, currentNode.direction, currentNode.length) === false) return false
-  //ends recursion if new node will overlap with existing tree
+    //ends recursion if new node will overlap with existing tree
   let newReservedCoordinates = makeReservedCoordinates(currentNode.start, currentNode.direction, currentNode.length)
-  //adds new coordinates to list of reserved ones
+    //adds new coordinates to list of reserved ones
   this.reservedCoordinates = this.reservedCoordinates.concat(newReservedCoordinates)
-  // console.log(this.reservedCoordinates)
   return currentNode
 }
 
 //takes branch info and checks new coordinates against existing ones
 function checkCoordinates (startCoordinate, direction, length) {
   let noOverlap = true
-  let newCoordinates = []
   for (let i = 0; i < length; i++) {
     let newCoordinate = [startCoordinate[0] + i * direction[0], startCoordinate[1] + i * direction[1]]
-    // console.log(this.reservedCoordinates)
     this.reservedCoordinates.forEach(coordinate => {
       let reservedX = coordinate[0]
       let reservedY = coordinate[1]
@@ -111,26 +108,22 @@ function checkCoordinates (startCoordinate, direction, length) {
       let newY = newCoordinate[1]
       if (reservedX === newX && reservedY === newY) {
         noOverlap = false
-        console.log('false')
       }
     })
-    if (noOverlap) newCoordinates.push(newCoordinate)
   }
-  if (noOverlap) return true
-  else return false
+  return noOverlap
 }
-
+  // adds to array of reserved coordinates
 function makeReservedCoordinates (startCoordinate, direction, length) {
   let newReservedCoordinates = []
   for (let i = 0; i < length; i++) {
-    if (direction[1] === 0) {
-      console.log('horizontal')
+    if (direction[1] === 0) { //horizontal growth
       newReservedCoordinates.push([startCoordinate[0] + i * direction[0], (startCoordinate[1] + i * direction[1]) - 1])
     }
-    if (direction[0] === -1 && direction[1] === 1) {
+    if (direction[0] === -1 && direction[1] === 1) { //diagonal left growth
       newReservedCoordinates.push([(startCoordinate[0] + i * direction[0]) + 1, startCoordinate[1] + i * direction[1]])
     }
-    if (direction[0] === 1 && direction[1] === 1) {
+    if (direction[0] === 1 && direction[1] === 1) { //diagonal right growth
       newReservedCoordinates.push([(startCoordinate[0] + i * direction[0]) - 1, startCoordinate[1] + i * direction[1]])
     }
   }
