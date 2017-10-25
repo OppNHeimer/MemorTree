@@ -14,23 +14,105 @@ function Node (length, direction, parent = null) {
 //   this.heads = [node]
 // }
 
-function GenerateTree (depth, length, direction, parent = null) {
-  if (depth <= 0) return null
-  let currentNode = new Node(length, direction, parent)
-  //check node against occupied cells
-  //add new node to occupied cells
+function GenerateTree (depth, length, direction) {
+  this.reservedCoordinates = []
+  this.root = growTrunk(depth, length, direction)
+  console.log(this.reservedCoordinates)
+  return this.root
+}
+
+function growTrunk (depth, length, direction, parent) {
+  let currentNode = checks(depth, length, direction, parent)
   if (depth > 0) {
     let doesSplit = randomInt(0, 1)
     if (doesSplit) {
-      currentNode.childLeft = GenerateTree(depth - 1, 3, [-1,1], currentNode)
-      currentNode.childRight = GenerateTree(depth - 1, 3, [1, 1], currentNode)
+      currentNode.childLeft = growTrunk(depth - 1, length, [0, 1], currentNode)
+      let rightOrLeft = randomInt(0, 1)
+      if (rightOrLeft) {
+        currentNode.childRight = growRightBranches(depth - 1, length, [1, 0], currentNode)
+      } else {
+        currentNode.childRight = growLeftBranches(depth - 1, length, [-1, 0], currentNode)
+      }
     } else {
-      currentNode.childLeft = GenerateTree(depth - 1, 3, [0, 1], currentNode)
+      let rightOrLeft = randomInt(0, 1)
+      if (rightOrLeft) {
+        currentNode.childRight = growTrunk(depth - 1, length, [1, 1], currentNode)
+      } else {
+        currentNode.childLeft = growTrunk(depth - 1, length, [-1, 1], currentNode)
+      }
     }
   }
   return currentNode
 }
 
+function growRightBranches (depth, length, direction, parent) {
+  let currentNode = checks(depth, length, direction, parent)
+  if (depth > 0) {
+    let doesSplit = randomInt(0, 1)
+    if (doesSplit) {
+      currentNode.childLeft = growRightBranches(depth - 1, length, [1, 1], currentNode)
+      currentNode.childRight = growRightBranches(depth - 1, length, [1, 0], currentNode)
+    } else {
+      let leftOrRight = randomInt(0, 1)
+      if (leftOrRight) {
+        currentNode.childLeft = growRightBranches(depth - 1, length, [1, 0], currentNode)
+      } else {
+        currentNode.childLeft = growRightBranches(depth - 1, length, [1, 1], currentNode)
+      }
+    }
+  }
+  return currentNode
+} 
+
+function growLeftBranches(depth, length, direction, parent) {
+  let currentNode = checks(depth, length, direction, parent)
+  if (depth > 0 && checks) {
+    let doesSplit = randomInt(0, 1)
+    if (doesSplit) {
+      currentNode.childLeft = growLeftBranches(depth - 1, length, [-1, 0], currentNode)
+      currentNode.childRight = growLeftBranches(depth - 1, length, [-1, 1], currentNode)
+    } else {
+      let leftOrRight = randomInt(0, 1)
+      if (leftOrRight) {
+        currentNode.childLeft = growLeftBranches(depth - 1, length, [-1, 1], currentNode)
+      } else {
+        currentNode.childLeft = growLeftBranches(depth - 1, length, [-1, 0], currentNode)
+      }
+    }
+  }
+  return currentNode
+} 
+
+function checks (depth, length, direction, parent) {
+  if (depth <= 0) return false //ends recursion at 0
+  let currentNode = new Node(length, direction, parent)
+  //checks new coordinates against existing ones
+  let newCoordinates = checkCoordinates(currentNode.start, currentNode.direction, currentNode.length)
+  //ends recursion if new node will overlap with existing tree
+  if (newCoordinates === false) return false
+  //adds new coordinates to list of reserved ones
+  this.reservedCoordinates = this.reservedCoordinates.concat(newCoordinates)
+  return currentNode
+}
+
+//takes branch info and checks new coordinates against existing ones
+function checkCoordinates (startCoordinate, direction, length) {
+  let noOverlap = true
+  let newCoordinates = []
+  for (let i = 0; i < length; i++) {
+    let newCoordinate = [startCoordinate[0] + i * direction[0], startCoordinate[1] + i * direction[1]]
+    if (this.reservedCoordinates.indexOf(newCoordinate) !== -1) {
+      noOverlap = false
+      console.log('false')
+    } else {
+      newCoordinates.push(newCoordinate)
+      console.log('true')
+    }
+  }
+
+  if (noOverlap) return newCoordinates
+  else return false
+}
 // TreeStructure.prototype.growTree = function () {
 
 //   this.heads.forEach( head => {
