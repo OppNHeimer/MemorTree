@@ -17,23 +17,31 @@
 .backgroundUnit {
   height: .5vw;
   width: .5vw;
-  margin: -.5px;
+  /* margin: -.5px; */
   background-color: lightblue;
-  border: .5px solid black;
+  /* border: .5px solid black; */
 }
 
 .branchUnit {
   height: .5vw;
   width: .5vw;
-  margin: -.5px;
-  background-color: brown;
-  border: .5px solid black;
+  /* margin: -.5px; */
+  background-color: rgb(67, 23, 13);
+  /* border: .5px solid black; */
+}
+
+.lightBranchUnit {
+  height: .5vw;
+  width: .5vw;
+  /* margin: -.5px; */
+  background-color: rgb(145, 53, 37);
+  /* border: .5px solid black; */
 }
 
 .leafUnit {
-  height: 1vw;
-  width: 1vw;
-  margin: -1px;
+  height: .5vw;
+  width: .5vw;
+  /* margin: -.5px; */
   background-color: lightgreen;
-  border: 1px solid black;
+  /* border: .5px solid black; */
 }

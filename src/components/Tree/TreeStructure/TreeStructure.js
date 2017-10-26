@@ -18,7 +18,6 @@ function growTrunk (depth, length, sub, direction, parent = null) {
   let currentNode = new Node(length, direction, parent)
   let grow        = doesGrow(currentNode)
 
-  if (currentNode.parent) console.log(currentNode.parent.direction)
 
   if (depth > 1 && grow) {
     let nextDepth  = depth - 1
@@ -144,10 +143,8 @@ function checkCoordinates (startCoordinate, direction, length) {
       let newX = newCoordinate[0]
       let newY = newCoordinate[1]
       if (reservedX === newX && reservedY === newY) {
-        // console.log('overlap')
         noOverlap = false
       } 
-      // else {console.log('ok')}
     })
   }
   return noOverlap
@@ -180,4 +177,4 @@ function randomInt (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min 
 }
 
-module.exports = {GenerateTree, Node}
+module.exports = {GenerateTree, Node, randomInt}
