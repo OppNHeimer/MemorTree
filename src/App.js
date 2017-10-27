@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Link to="/">
+          <Link to="/memorTree">
             <Tree/>
           </Link>
         </div>
