@@ -15,7 +15,6 @@
   width: 30vw;
   bottom: 5vh;
   left: 0vh;
-  /* margin: 5vh 5vh 0 auto; */
 }
 
 .gridContainer {
@@ -31,31 +30,23 @@
 .backgroundUnit {
   height: .5vw;
   width: .5vw;
-  /* margin: -.5px; */
   background-color: transparent;
-  /* border: .5px solid black; */
 }
 
 .branchUnit {
   height: .5vw;
   width: .5vw;
-  /* margin: -.5px; */
   background-color: rgb(67, 23, 13);
-  /* border: .5px solid black; */
 }
 
 .lightBranchUnit {
   height: .5vw;
   width: .5vw;
-  /* margin: -.5px; */
   background-color: rgb(145, 53, 37);
-  /* border: .5px solid black; */
 }
 
 .leafUnit {
   height: .5vw;
   width: .5vw;
-  /* margin: -.5px; */
   background-color: rgb(255, 146, 166);
-  /* border: .5px solid black; */
 }
