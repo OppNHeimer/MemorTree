@@ -4,7 +4,7 @@ function Node (length, direction, parent = null) {
   this.childRight = null
   this.length     = Math.ceil(length)
   this.direction  = direction
-  this.start      = this.parent ? [this.parent.end[0], this.parent.end[1]] : [0, -50]
+  this.start      = this.parent ? [this.parent.end[0], this.parent.end[1]] : [0, -11]
   this.end        = [this.start[0] + Math.ceil(length) * direction[0], this.start[1] + Math.ceil(length) * direction[1]]
 }
 
@@ -106,8 +106,8 @@ function growLeftBranches(depth, length, sub, direction, parent) {
     if (length === sub - 1) nextSub = sub - 1
     let doesSplit = randomInt(0, 1)
     if (doesSplit) {
-      currentNode.childLeft = growLeftBranches(nextDepth, nextLength, nextSub, [-1, 0], currentNode)
-      currentNode.childRight = growLeftBranches(nextDepth, nextLength, nextSub, [-1, 1], currentNode)
+      currentNode.childLeft = growLeftBranches(nextDepth, nextLength, nextSub, [-1, 1], currentNode)
+      currentNode.childRight = growLeftBranches(nextDepth, nextLength, nextSub, [-1, 0], currentNode)
     } else {
       let leftOrRight = randomInt(0, 1)
       if (leftOrRight) {
