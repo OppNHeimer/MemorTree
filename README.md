@@ -33,3 +33,7 @@ memorTree is a bit clunky and needs an overhaul. It currently renders hundreds o
 memorTree is a portmanteau of the words memory and tree. The long term vision of memorTree is to use it as a key visual and motivator in a mobile diary or journaling application. In memorTree, the app, memories are stored as petals on the user's tree. Trees grow as users continue to journal and new petals are needed to store new memories.
 
 Current research suggests there are many benefits of journaling, such as improving mental health, creativity, and emotional intelligence. Keeping a log of thoughts and experiences can improve everyone's well-being. memorTree will not only offer a simple and calming environment to journal but also positive reinforcement and the reward of nourishing a tree that represents the user's own memories.
+
+## Author
+
+[Max Houston Oppenheimer](https://oppnheimer.github.io/) - *budding* web developer and designer
